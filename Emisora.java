@@ -1,31 +1,37 @@
-import java.util.ArrayList;
+
 public class Emisora {
 
     private String Nombre;
     private String Frase;
     private float Tipo;
-    private ArrayList<Cancion> Canciones;
-
+    private boolean canal;
+    
     public Emisora() {
         Nombre = "";
         Frase = "";
         Tipo = 0;
-        Canciones = new ArrayList<Cancion>();
+        canal= true;
+        
     }
 
-    public Emisora(String Nombre, String Frase, float Tipo, ArrayList<Cancion> Canciones) {
+    public Emisora(String Nombre, String Frase, float Tipo, boolean canal) {
         this.Nombre = Nombre;
         this.Frase = Frase;
         this.Tipo = Tipo;
-        this.Canciones = Canciones;
+        this.canal= canal;
+        
     }
 
-    public ArrayList<Cancion> getCanciones() {
-        return this.Canciones;
+    public boolean isCanal() {
+        return this.canal;
     }
 
-    public void setCanciones(ArrayList<Cancion> Canciones) {
-        this.Canciones = Canciones;
+    public boolean getCanal() {
+        return this.canal;
+    }
+
+    public void setCanal(boolean canal) {
+        this.canal = canal;
     }
 
     public String getNombre() {
@@ -52,13 +58,9 @@ public class Emisora {
         this.Tipo = Tipo;
     }
 
-    @Override
+ 
     public String toString() {
-        return "{" +
-            " Nombre='" + getNombre() + "'" +
-            ", Frase='" + getFrase() + "'" +
-            ", Tipo='" + getTipo() + "'" +
-            "}";
+        return Nombre+" "+Frase+" "+Tipo+" "+canal;
     }
     
 }

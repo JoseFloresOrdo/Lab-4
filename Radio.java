@@ -1,25 +1,84 @@
 public class Radio {
-
+    private boolean encendida;
     private float Frecuencia;
     private boolean Canal;
-    private String[] Emisora;
+    private Emisora[] Emisora;
     private int Volumen;
-
+   private Emisora[] guardados;
     public Radio() {
         Frecuencia = 0;
         Canal = false;
-        Emisora = new String[50];
+        Emisora = new Emisora[]{new Emisora("La joya","La mejor",(float)0.5,true), new Emisora("La bendición","La mejor mejor",(float) 1,true), new Emisora("Math","Matebuena",(float) 1.5,false), new Emisora("Bar","Muy buena",(float) 2,false)};
         Volumen = 0;
+        guardados= new Emisora[50];
     }
 
-    public Radio(float Frecuencia, boolean Canal, String[] Emisora, int Volumen) {
+    public boolean isEncendida() {
+        return this.encendida;
+    }
+
+    public boolean getEncendida() {
+        return this.encendida;
+    }
+
+    public void setEncendida(boolean encendida) {
+        this.encendida = encendida;
+    }
+    public void setEmisora(Emisora[] Emisora) {
+        this.Emisora = Emisora;
+    }
+
+    public Emisora[] getGuardados() {
+        return this.guardados;
+    }
+
+    public void setGuardados(Emisora[] guardados) {
+        this.guardados = guardados;
+    }
+
+    public Radio(float Frecuencia, boolean Canal, int Volumen) {
         this.Frecuencia = Frecuencia;
         this.Canal = Canal;
-        this.Emisora = Emisora;
+        this.Emisora = new Emisora[50];
         this.Volumen = Volumen;
     }
 
-    public float getVolumen(){
+    public Emisora getEmisora(int ind){
+        return Emisora[ind];
+    }
+    public void guardarEmisora(Emisora emisora){
+       for(int i=0; i<50; i++){
+        if(guardados[i]==null){
+            guardados[i]=emisora;
+        }
+       }
+    }
+    public Emisora getGuardado(int num){
+        return guardados[num];
+    }
+    public Emisora[] tomaremisora(){
+        Emisora[] canemisora= new Emisora[50];
+        int i=0;
+        if(Canal==true){
+            for(Emisora emisora: Emisora){
+                if (emisora.getCanal()==true){
+                    canemisora[i]=emisora;
+                    i++;
+                }
+            }
+        }
+        else if(Canal==false){
+            for(Emisora emisora: Emisora){
+                if (emisora.getCanal()==false){
+                    canemisora[i]=emisora;
+                    i++;
+                }
+            }
+        }
+        return canemisora;
+    }
+
+    public int getVolumen(){
         return this.Volumen;
     }
 
@@ -47,13 +106,11 @@ public class Radio {
         this.Canal = Canal;
     }
 
-    public String[] getContactos() {
+    public Emisora[] getContactos() {
         return this.Emisora;
     }
 
-    public void setContactos(String[] Emisora) {
-        this.Emisora = Emisora;
-    }
+   
 
     @Override
     public String toString() {
