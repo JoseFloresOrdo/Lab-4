@@ -11,6 +11,7 @@ public class Radio {
         Emisora = new Emisora[]{new Emisora("La joya","La mejor",(float)0.5,true), new Emisora("La bendición","La mejor mejor",(float) 1,true), new Emisora("Math","Matebuena",(float) 1.5,false), new Emisora("Bar","Muy buena",(float) 2,false)};
         Volumen = 0;
         guardados= new Emisora[50];
+        encendida= false;
     }
 
     public boolean isEncendida() {

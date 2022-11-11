@@ -27,5 +27,7 @@ public class Contacto {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
+    public String toString(){
+        return "Contacto: "+nombre+" Número: "+numero;
+    }
 }

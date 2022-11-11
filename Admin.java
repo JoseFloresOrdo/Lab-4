@@ -47,27 +47,36 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
 
      
     public String mostrarConstactos() {
-        for (String i: telefono.getContactos()){
-            return i;
+        String str="Lista de contactos \n";
+        for (Contacto contacto: telefono.getContactos()){
+            str+=contacto.toString()+"\n";
         }
-        return "No tienes contactos";
+        return str;
         
     }
 
      
     public String llamarContactos(int desicion) {
-        int numero = (int)(Math.random()*10+1);
+        
         telefono.setEstado("Activo");
-        if (desicion == 1){
-            return telefono.getContactos()[numero];
+        if ( telefono.getContactos()[desicion]!=null){
+            return "Llamando a... "+telefono.getContactos()[desicion].toString();
         }
-        return telefono.getEstado();
+        else if(telefono.getContactos()[desicion]==null){
+            return "No tiene más contactos";
+        }
+        return "No tiene más contactos";
         
     }
 
      
     public String finalizarLlamadaEspera() {
-        telefono.setEstado("Finalizado");
+        if(telefono.getEstado().equals("Activo")){
+            telefono.setEstado("Finalizado");
+        }
+        else{
+            return "Su teléfono no está en llamada";
+        }
         return telefono.getEstado();
         
     }
@@ -82,6 +91,7 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     public String seleccionarPlaylist(int decision) {
         String str="";
         if(decision==1){
+            numcancion=0;
             playlist1.clear();
             playlist1.add(new Cancion("Walk", "Pantera",(float)5.16));
             playlist1.add(new Cancion("Fear of the Dark","Iron Maiden",(float) 7.19));
@@ -92,6 +102,7 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
             str="Playlist de metal "+"\nReproduciendo:"+playlist1.get(0).getNombre()+" "+playlist1.get(0).getArtista()+" "+playlist1.get(0).getDuracion();
         }
         else if(decision==2){
+            numcancion=0;
             playlist1.clear();
             playlist1.add(new Cancion("Die for you", "joji",(float) 3.22));
             playlist1.add(new Cancion("Level of concern","Twenty One Pilots",(float) 3.53));
@@ -158,54 +169,70 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
 
      
     public String cambiarFrecuencia(String frecuencia) {
+        if (radio.isEncendida() == true){
+            if(frecuencia.equals("AM")){
+                radio.setCanal(true);
+                return "AM";
+            }
+            else if(frecuencia.equals("FM")){
+                radio.setCanal(false);
+                return "FM";
+            }
+        }
         
-        if(frecuencia.equals("AM")){
-            radio.setCanal(true);
-            return "AM";
-        }
-        else if(frecuencia.equals("FM")){
-            radio.setCanal(false);
-            return "FM";
-        }
-        return "Ingrese una opción válida";
+        return "Su radio está apagada";
     }
 
      
     public float cambiarEmisoras(boolean arriba) {
         float tipo=0;
-        if(arriba==true ){
-            ind++;
-            if(radio.tomaremisora()[ind]!=null){
-                tipo=radio.tomaremisora()[ind].getTipo();
+        if (radio.isEncendida() == true){
+            if(arriba==true ){
+                ind++;
+                if(radio.tomaremisora()[ind]!=null){
+                    tipo=radio.tomaremisora()[ind].getTipo();
+                }
+                
+                
             }
-            
-            
-        }
-        else if(arriba==false ){
-            ind--;
-            if(radio.tomaremisora()[ind]!=null){
-                tipo=radio.tomaremisora()[ind].getTipo();
+            else if(arriba==false ){
+                ind--;
+                if(radio.tomaremisora()[ind]!=null){
+                    tipo=radio.tomaremisora()[ind].getTipo();
+                }
             }
+            else if(radio.tomaremisora()[ind]==null){
+                return 0;
+            }  
         }
-        else if(radio.tomaremisora()[ind]==null){
-            return 0;
-        }
-
         return tipo;
     }
 
      
     public void guardarEmisoras() {
-        radio.guardarEmisora(radio.tomaremisora()[ind]);
-        
+        if (radio.isEncendida() == true){
+            radio.guardarEmisora(radio.tomaremisora()[ind]);
+        }
     }
 
      
-    public void cargarEmisoras() {
+    public String cargarEmisoras(int i) {
+        for(Emisora emisora: radio.getGuardados()){
+            if(radio.getGuardados()[i]!=null){
+                return emisora.toString();
+            }
+        }
+
+        
+        return "No tiene ninguna emisora guardada en esa posición";
         
         
+    }
+
+    @Override
+    public String mostrarPlaylists() {
         
-        
+        return "1) Playlist de metal 2) Playlist de R&B y rock";
     }
     
 }
