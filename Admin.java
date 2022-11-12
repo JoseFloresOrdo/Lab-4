@@ -1,3 +1,22 @@
+/*
+ * ------------------------------------------------------------------
+ *Universidad del Valle de Guatemala
+ *Facultad de Ingeniería
+ *Programación orientada a objetos
+ *Catedrática: Lynette
+ *Auxiliar: Ayleen
+ *Ciclo II - 2022
+ *Sección: 40
+ *Autor: Allen Estuardo Ramírez De Paz, 22326
+ José Javier Flores Ordoñez, 22730
+ *Fecha: Noviembre 2022
+ *Descripción: El siguiente programa es el controlador.
+ *Laboratorio 4.
+------------------------------------------------------------------
+ * 
+ * 
+ * 
+ */
 import java.util.Random;
 import java.util.ArrayList;
 public class Admin implements modoRadio, modoReproduccion, modoTelefono, productividad {
@@ -14,6 +33,10 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
         numcancion=0;
     }
      
+    
+    /** 
+     * @return String
+     */
     public String pronosticoClima() {
         Random random= new Random();
        String str="";
@@ -46,6 +69,10 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @return String
+     */
     public String mostrarConstactos() {
         String str="Lista de contactos \n";
         for (Contacto contacto: telefono.getContactos()){
@@ -56,6 +83,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @param desicion
+     * @return String
+     */
     public String llamarContactos(int desicion) {
         
         telefono.setEstado("Activo");
@@ -70,6 +102,10 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @return String
+     */
     public String finalizarLlamadaEspera() {
         if(telefono.getEstado().equals("Activo")){
             telefono.setEstado("Finalizado");
@@ -82,12 +118,21 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @return String
+     */
     public String cambiarLlamadaEspera() {
         telefono.setEstado("Espera");
         return telefono.getEstado();
     }
 
      
+    
+    /** 
+     * @param decision
+     * @return String
+     */
     public String seleccionarPlaylist(int decision) {
         String str="";
         if(decision==1){
@@ -115,6 +160,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
     
+    
+    /** 
+     * @param arriba
+     * @return String
+     */
     public String cambiarCancion(boolean arriba) {
         String str="";
         try {
@@ -145,6 +195,10 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @return boolean
+     */
     public boolean estadoRadio() {
 
         if(radio.getEncendida()==true){
@@ -157,6 +211,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
     
+    
+    /** 
+     * @param arriba
+     * @return int
+     */
     public int cambiarVolumen(boolean arriba) {
         if(arriba==true){
             radio.setVolumen(radio.getVolumen()+1);
@@ -168,6 +227,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @param frecuencia
+     * @return String
+     */
     public String cambiarFrecuencia(String frecuencia) {
         if (radio.isEncendida() == true){
             if(frecuencia.equals("AM")){
@@ -184,6 +248,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @param arriba
+     * @return float
+     */
     public float cambiarEmisoras(boolean arriba) {
         float tipo=0;
         if (radio.isEncendida() == true){
@@ -216,6 +285,11 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
     }
 
      
+    
+    /** 
+     * @param i
+     * @return String
+     */
     public String cargarEmisoras(int i) {
         for(Emisora emisora: radio.getGuardados()){
             if(radio.getGuardados()[i]!=null){
@@ -229,6 +303,10 @@ public class Admin implements modoRadio, modoReproduccion, modoTelefono, product
         
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String mostrarPlaylists() {
         

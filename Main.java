@@ -1,3 +1,22 @@
+/*
+ * ------------------------------------------------------------------
+ *Universidad del Valle de Guatemala
+ *Facultad de Ingeniería
+ *Programación orientada a objetos
+ *Catedrática: Lynette
+ *Auxiliar: Ayleen
+ *Ciclo II - 2022
+ *Sección: 40
+ *Autor: Allen Estuardo Ramírez De Paz, 22326
+  José Javier Flores Ordoñez, 22730
+ *Fecha: Noviembre 2022
+ *Descripción: El siguiente programa es el main.
+ *Laboratorio 4.
+------------------------------------------------------------------
+ * 
+ * 
+ * 
+ */
 import java.util.Scanner;
 
 public class Main {
@@ -12,9 +31,9 @@ public class Main {
         String red="\u001B[31m";
         String verde="\u001B[32m";
         System.out.println("Bienvenido al coche Clase C\n ");
-        while(menu==true){
+        while(menu==true){ 
             try {
-            System.out.println("¿Qué hará hoy?\n1) Encender/Apagar radio   2)Subir/bajar volumen   3)Cambiar AM/FM  4)Subir/Bajar Emisora\n5)Guardar emisora actual  6)Cargar emisora   7)Elegir Playlist   8)Cambiar canción\n9)Mostrar contactos   10)Llamada   11)Finalizar llamada");
+            System.out.println("¿Qué hará hoy?\n1) Encender/Apagar radio   2)Subir/bajar volumen   3)Cambiar AM/FM  4)Subir/Bajar Emisora\n5)Guardar emisora actual  6)Cargar emisora   7)Elegir Playlist   8)Cambiar canción\n9)Mostrar contactos   10)Llamada   11)Finalizar llamada 12) Mostrar playlist 13) Cambiar llamada a espera");
             
             opc= teclado.nextInt();
             teclado.nextLine();
@@ -79,7 +98,10 @@ public class Main {
                     System.out.println(amarillo+admin.finalizarLlamadaEspera()+reset);
                 }
                 else if(opc==12){
-                    System.out.println(admin.mostrarPlaylists());
+                    System.out.println(amarillo+admin.mostrarPlaylists()+reset);
+                }
+                else if(opc==13){
+                    System.out.println(amarillo+admin.cambiarLlamadaEspera()+reset);
                 }
             } catch (Exception e) {
                 opc=0;
